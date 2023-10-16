@@ -4,6 +4,7 @@ const playerOneGrid = [];
 const playerTwoGrid = [];
 
 const boxes = document.querySelectorAll(".box");
+const resetButton = document.querySelector("#reset-button");
 
 boxes.forEach((box) => {
     box.addEventListener("click", (evt) => {
@@ -19,4 +20,12 @@ boxes.forEach((box) => {
             }
         }
     });
+});
+
+resetButton.addEventListener("click", () => {
+    boxes.forEach((box) => {
+        box.textContent = "";
+    })
+    playerOneGrid.splice(0, playerOneGrid.length);
+    playerTwoGrid.splice(0, playerTwoGrid.length);
 });
