@@ -1,4 +1,5 @@
 let playerOneTurn = true;
+let gameInProgress = true;
 
 const playerOneGrid = [];
 const playerTwoGrid = [];
@@ -18,17 +19,19 @@ const resetButton = document.querySelector("#reset-button");
 
 boxes.forEach((box) => {
     box.addEventListener("click", (evt) => {
-        if (evt.target.textContent == "") {
-            if (playerOneTurn == true) {
-                evt.target.textContent = "X";
-                playerOneGrid.push(evt.target.dataset.position);
-                playerOneTurn = false;
-                checkWin();
-            } else {
-                evt.target.textContent = "O";
-                playerTwoGrid.push(evt.target.dataset.position);
-                playerOneTurn = true;
-                checkWin();
+        if (gameInProgress == true) {
+            if (evt.target.textContent == "") {
+                if (playerOneTurn == true) {
+                    evt.target.textContent = "X";
+                    playerOneGrid.push(evt.target.dataset.position);
+                    playerOneTurn = false;
+                    checkWin();
+                } else {
+                    evt.target.textContent = "O";
+                    playerTwoGrid.push(evt.target.dataset.position);
+                    playerOneTurn = true;
+                    checkWin();
+                }
             }
         }
     });
@@ -40,14 +43,21 @@ resetButton.addEventListener("click", () => {
     })
     playerOneGrid.splice(0, playerOneGrid.length);
     playerTwoGrid.splice(0, playerTwoGrid.length);
+    gameInProgress = true;
 });
 
 function checkWin() {
     for(i = 0; i < winConditions.length; i++) {
         if (winConditions[i].every(elem => playerOneGrid.includes(elem))) {
             console.log("Player 1 Wins!");
+            gameInProgress = false;
         } else if (winConditions[i].every(elem => playerTwoGrid.includes(elem))) {
             console.log("Player 2 Wins!");
+            gameInProgress = false;
+        } else if (playerOneGrid.length + playerTwoGrid.length == 9) {
+            console.log("It's a draw!")
+            gameInProgress = false;
+            break;
         }
     }
 }
