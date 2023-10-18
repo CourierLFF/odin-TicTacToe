@@ -1,5 +1,7 @@
 let playerOneTurn = true;
 let gameInProgress = true;
+let playerOneScore = 0;
+let playerTwoScore = 0;
 
 const playerOneGrid = [];
 const playerTwoGrid = [];
@@ -16,6 +18,8 @@ const winConditions = [
 
 const boxes = document.querySelectorAll(".box");
 const resetButton = document.querySelector("#reset-button");
+const playerOneScoreElem = document.querySelector("#player-one-score");
+const playerTwoScoreElem = document.querySelector("#player-two-score");
 
 boxes.forEach((box) => {
     box.addEventListener("click", (evt) => {
@@ -49,10 +53,12 @@ resetButton.addEventListener("click", () => {
 function checkWin() {
     for(i = 0; i < winConditions.length; i++) {
         if (winConditions[i].every(elem => playerOneGrid.includes(elem))) {
-            console.log("Player 1 Wins!");
+            playerOneScore += 1;
+            playerOneScoreElem.textContent = `Player 1 Score: ${playerOneScore}`;
             gameInProgress = false;
         } else if (winConditions[i].every(elem => playerTwoGrid.includes(elem))) {
-            console.log("Player 2 Wins!");
+            playerTwoScore += 1;
+            playerTwoScoreElem.textContent = `Player 2 Score: ${playerTwoScore}`;
             gameInProgress = false;
         } else if (playerOneGrid.length + playerTwoGrid.length == 9) {
             console.log("It's a draw!")
