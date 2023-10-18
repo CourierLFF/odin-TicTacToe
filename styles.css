@@ -21,6 +21,13 @@ h1 {
     margin: 20px 80px;
 }
 
+#turn-info {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
 .game-board {
     width: 600px;
     height: 600px;
