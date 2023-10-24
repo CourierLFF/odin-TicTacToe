@@ -1,7 +1,9 @@
 let playerOneTurn = true;
-let gameInProgress = true;
+let gameInProgress = false;
 let playerOneScore = 0;
 let playerTwoScore = 0;
+let playerSign = "";
+let computerSign = "";
 
 const playerOneGrid = [];
 const playerTwoGrid = [];
@@ -21,19 +23,45 @@ const resetButton = document.querySelector("#reset-button");
 const playerOneScoreElem = document.querySelector("#player-one-score");
 const playerTwoScoreElem = document.querySelector("#player-two-score");
 const turnInfo = document.querySelector("#turn-info")
+const xButton = document.querySelector("#x-button");
+const oButton = document.querySelector("#o-button");
+const startButton = document.querySelector("#start-button");
+const gameSetupDisplay = document.querySelector(".game-setup");
+
+xButton.addEventListener("click", (evt) => {
+    evt.target.style.backgroundColor = "#03adfc";
+    oButton.style.backgroundColor = "white";
+    playerSign = "X";
+    computerSign = "O";
+});
+
+oButton.addEventListener("click", (evt) => {
+    evt.target.style.backgroundColor = "#fc0339";
+    xButton.style.backgroundColor = "white";
+    playerSign = "O";
+    computerSign = "X";
+});
+
+startButton.addEventListener("click", (evt) => {
+    if (playerSign != "" && computerSign != "") {
+        gameSetupDisplay.style.display = "none";
+        gameInProgress = true;
+        resetButton.disabled = false;
+    }
+});
 
 boxes.forEach((box) => {
     box.addEventListener("click", (evt) => {
         if (gameInProgress == true) {
             if (evt.target.textContent == "") {
                 if (playerOneTurn == true) {
-                    evt.target.textContent = "X";
+                    evt.target.textContent = playerSign;
                     playerOneGrid.push(evt.target.dataset.position);
                     playerOneTurn = false;
                     turnInfo.textContent = "Player Two Turn!";
                     checkWin();
                 } else {
-                    evt.target.textContent = "O";
+                    evt.target.textContent = computerSign;
                     playerTwoGrid.push(evt.target.dataset.position);
                     playerOneTurn = true;
                     turnInfo.textContent = "Player One Turn!";

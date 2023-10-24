@@ -10,6 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="game-setup">
+        <div class="sign-choice">
+            <p>Which Sign?</p>
+            <button class="choice-button" id="x-button">X</button>
+            <button class="choice-button" id="o-button">O</button>
+        </div>
+        <button id="start-button">Start!</button>
+    </div>
     <div class="main-container">
         <h1>Tic-Tac-Toe!</h1>
         <div class="score-info">
@@ -28,9 +36,9 @@
             <div class="box" data-position="7"></div>
             <div class="box" data-position="8"></div>
         </div>
-        <button id="reset-button">Reset</button>
+        <button id="reset-button" disabled>Reset</button>
+        <div class="credit">Made With &lt;3 by <a href="https://github.com/CourierLFF">Courier</a></div>
     </div>
-    <div class="credit">Made With &lt;3 by <a href="https://github.com/CourierLFF">Courier</a></div>
 </body>
 <script src="index.js"></script>
 </html>
